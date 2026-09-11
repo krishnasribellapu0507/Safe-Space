@@ -1,0 +1,1 @@
+const {load,save}=require('../config/database');const Appointment=require('../models/Appointment');exports.create=(req,res)=>{const db=load(),a=Appointment({...req.body,userId:req.user.id});db.appointments.push(a);save(db);res.status(201).json(a)};exports.list=(req,res)=>res.json(load().appointments.filter(x=>x.userId===req.user.id));

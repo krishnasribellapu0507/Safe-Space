@@ -1,0 +1,70 @@
+{
+  "users": [
+    {
+      "id": "demo",
+      "name": "Krishnasri",
+      "email": "demo@safespace.app",
+      "language": "English"
+    }
+  ],
+  "moods": [
+    {
+      "id": "m1",
+      "userId": "demo",
+      "mood": "okay",
+      "createdAt": "2026-09-08T09:00:00Z"
+    },
+    {
+      "id": "m2",
+      "userId": "demo",
+      "mood": "worried",
+      "createdAt": "2026-09-09T09:00:00Z"
+    },
+    {
+      "id": "m3",
+      "userId": "demo",
+      "mood": "low",
+      "createdAt": "2026-09-10T09:00:00Z"
+    }
+  ],
+  "journals": [
+    {
+      "id": "j1",
+      "userId": "demo",
+      "text": "Upcoming hearing is making me worried, but breathing helped.",
+      "mood": "Worried",
+      "favorite": true
+    }
+  ],
+  "counsellors": [
+    {
+      "id": "c1",
+      "name": "Dr. Ananya Rao",
+      "languages": [
+        "English",
+        "Telugu"
+      ],
+      "availability": "Demo: today 4 PM"
+    },
+    {
+      "id": "c2",
+      "name": "Meera Singh",
+      "languages": [
+        "English",
+        "Hindi"
+      ],
+      "availability": "Demo: tomorrow 11 AM"
+    }
+  ],
+  "appointments": [],
+  "journey": [
+    {
+      "id": "e1",
+      "userId": "demo",
+      "stage": "Hearing",
+      "date": "2026-09-12T10:00:00Z",
+      "note": "Demo upcoming case event"
+    }
+  ],
+  "alerts": []
+}

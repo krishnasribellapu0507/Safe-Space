@@ -1,0 +1,1 @@
+function requestCounsellor(){const a=SafeSpace.store.get('appointments',[]);a.push({id:Date.now(),name:document.querySelector('#counsellor').value,status:'Requested',at:new Date().toISOString()});SafeSpace.store.set('appointments',a);SafeSpace.toast('Request saved for demo')}

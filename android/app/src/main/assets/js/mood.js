@@ -1,0 +1,1 @@
+function saveMood(mood){const a=SafeSpace.store.get('moods',[]);a.push({mood,at:new Date().toISOString()});SafeSpace.store.set('moods',a);SafeSpace.store.set('lastMood',mood);SafeSpace.toast('Check-in saved');setTimeout(()=>location.href='dashboard.html',500)}

@@ -1,0 +1,1 @@
+@keyframes float{50%{transform:translateY(-7px)}}@keyframes pop{to{transform:scale(1.4);opacity:0}}.float{animation:float 2.4s ease-in-out infinite}.pop{animation:pop .22s ease-out forwards}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

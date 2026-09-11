@@ -1,0 +1,1 @@
+const steps=['5 things you can see','4 things you can touch','3 things you can hear','2 things you can smell','1 thing you can taste'];let gi=0;function nextGround(){gi=Math.min(gi+1,steps.length-1);document.querySelector('#groundStep').textContent=steps[gi]}

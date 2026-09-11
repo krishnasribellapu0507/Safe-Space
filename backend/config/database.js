@@ -1,0 +1,1 @@
+const fs=require('fs');const path=require('path');const FILE=path.resolve(process.env.DATA_FILE||path.join(__dirname,'../data/demoData.json'));function load(){return JSON.parse(fs.readFileSync(FILE,'utf8'))}function save(db){fs.writeFileSync(FILE,JSON.stringify(db,null,2))}module.exports={load,save,FILE};

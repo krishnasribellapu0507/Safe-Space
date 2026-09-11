@@ -1,0 +1,1 @@
+const {load,save}=require('../config/database');const Mood=require('../models/Mood');exports.create=(req,res)=>{const db=load(),m=Mood({...req.body,userId:req.user.id});db.moods.push(m);save(db);res.status(201).json(m)};exports.history=(req,res)=>{const db=load();res.json(db.moods.filter(x=>x.userId===req.user.id))};

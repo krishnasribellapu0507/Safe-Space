@@ -1,0 +1,1 @@
+const {load,save}=require('../config/database');const Event=require('../models/JourneyEvent');exports.list=(req,res)=>res.json(load().journey.filter(x=>x.userId===req.user.id));exports.create=(req,res)=>{const db=load(),e=Event({...req.body,userId:req.user.id});db.journey.push(e);save(db);res.status(201).json(e)};

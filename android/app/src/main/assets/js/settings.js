@@ -1,0 +1,1 @@
+function setTheme(v){const s=SafeSpace.store.get('settings',{});s.theme=v;SafeSpace.store.set('settings',s);SafeSpace.apply();SafeSpace.toast(v+' theme saved')}function saveProfile(){const n=document.querySelector('#profileName').value.trim();if(n){SafeSpace.store.set('profile',{...SafeSpace.profile(),name:n});SafeSpace.apply();SafeSpace.toast('Profile saved')}}

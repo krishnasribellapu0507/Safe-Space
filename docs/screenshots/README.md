@@ -1,0 +1,1 @@
+Add final APK screenshots here before SIH submission. Suggested names: `01-login.png`, `02-dashboard.png`, `03-checkin.png`, `04-emotional-weather.png`, `05-justice-journey.png`, `06-counsellor.png`, `07-healing-garden.png`, `08-privacy.png`.

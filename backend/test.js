@@ -1,0 +1,1 @@
+const assert=require('assert');const {compute}=require('./services/trendEngine');const t=compute([{mood:'worried'},{mood:'low'}],[{stage:'Hearing'}]);assert(t.score>25);assert(t.reasons.length);console.log('backend trendEngine test passed',t);

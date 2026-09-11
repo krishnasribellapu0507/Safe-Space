@@ -1,0 +1,1 @@
+function toggleDiscreet(){const s=SafeSpace.store.get('settings',{theme:'light'});s.discreet=!s.discreet;SafeSpace.store.set('settings',s);SafeSpace.toast(s.discreet?'Discreet mode on':'Discreet mode off')}function clearDemo(){if(confirm('Clear local prototype data?')){localStorage.clear();SafeSpace.toast('Local demo data cleared')}}
