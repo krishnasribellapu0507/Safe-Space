@@ -79,8 +79,8 @@ final class SupportView extends PastelScreenView {
         return hero;
     }
 
-    private View supportCard(String glyph, int fill, int color,
-                             String title, String subtitle, String message) {
+    private LinearLayout supportCard(String glyph, int fill, int color,
+                                     String title, String subtitle, String message) {
         LinearLayout card = bottomRowCard(glyph, fill, color, title, subtitle,
                 null, message);
         if ("Emergency Help".equals(title)) {
