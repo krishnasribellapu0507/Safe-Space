@@ -42,3 +42,11 @@ el('loginForm').addEventListener('submit',async event=>{
 el('refresh').addEventListener('click',()=>load().catch(error=>el('connection').textContent=error.message));
 el('signOut').addEventListener('click',()=>{sessionStorage.removeItem('safeSpaceStaffSession');location.reload()});
 if(sessionToken)load().catch(()=>sessionStorage.removeItem('safeSpaceStaffSession'));
+
+document.querySelectorAll('.nav[data-target]').forEach(button=>button.addEventListener('click',()=>{
+  document.querySelectorAll('.nav').forEach(x=>x.classList.remove('active'));
+  button.classList.add('active');
+  const target=button.dataset.target;
+  if(target==='top') window.scrollTo({top:0,behavior:'smooth'});
+  else document.getElementById(target)?.closest('.panel')?.scrollIntoView({behavior:'smooth',block:'start'});
+}));

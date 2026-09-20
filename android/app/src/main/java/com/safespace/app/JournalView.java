@@ -261,9 +261,9 @@ final class JournalView extends FrameLayout {
         bar.setBackground(gradient(GradientDrawable.Orientation.TOP_BOTTOM,
                 new int[]{0xFCFFFFFF, 0xFFF4F7FF}, 0));
         bar.addView(nav("⌂", "Home", 8, false), navParams());
-        bar.addView(nav("☺", "Check-in", 9, false), navParams());
-        bar.addView(lotus(), navParams());
+        bar.addView(nav("▤", "Journal", 11, true), navParams());
         bar.addView(nav("◌", "Calm", 12, false), navParams());
+        bar.addView(nav("▥", "Insights", 14, false), navParams());
         bar.addView(nav("●", "Profile", 16, false), navParams());
         return bar;
     }
