@@ -151,7 +151,12 @@ final class MoodCheckInView extends FrameLayout {
         save.setContentDescription("Save " + selectedMood + " mood check-in");
         save.setOnClickListener(view -> {
             SupportSignalEngine.recordMood(activity, selectedMood, note.getText().toString());
-            navigator.openScreen(21);
+            new android.app.AlertDialog.Builder(activity)
+                    .setTitle("Thanks for checking in.")
+                    .setMessage("Want to add a few optional details about sleep, stress, energy, safety and connection?")
+                    .setPositiveButton("Add details", (dialog, which) -> navigator.openScreen(29))
+                    .setNegativeButton("Done", (dialog, which) -> navigator.openScreen(21))
+                    .show();
         });
         content.addView(save, marginParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, dp(56), 0, dp(20), 0, 0));

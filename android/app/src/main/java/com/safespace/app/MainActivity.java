@@ -173,7 +173,7 @@ public final class MainActivity extends Activity implements ScreenNavigator {
 
     @Override
     public void openScreen(int screenNumber) {
-        if (screenNumber < 8 || screenNumber > 28 || activeAppView == null
+        if (screenNumber < 8 || screenNumber > 29 || activeAppView == null
                 || pageTransitionRunning || screenNumber == activeScreenNumber) {
             return;
         }
@@ -272,6 +272,8 @@ public final class MainActivity extends Activity implements ScreenNavigator {
                 return new SafeSpace360View(this, this);
             case 28:
                 return new DetoxSessionView(this, this);
+            case 29:
+                return new WellbeingCheckInView(this, this);
             default:
                 return null;
         }

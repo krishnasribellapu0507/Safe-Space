@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Safe Space Admin</title><link rel="stylesheet" href="dashboard.css"><script defer src="dashboard.js"></script>
+</head>
+<body><div class="shell">
+<aside class="sidebar"><div class="brand"><span class="brand-mark">SS</span><div><strong>Safe Space</strong><small>Authorized support workspace</small></div></div>
+<nav><button class="nav active">Overview</button><button class="nav">Alerts</button><button class="nav">Users</button><button class="nav">Support Requests</button><button class="nav">Appointments</button><button class="nav">Resources</button><button class="nav">Reports</button><button class="nav">Audit Logs</button><button class="nav">Settings</button></nav>
+<div class="privacy-note">Journal text is never displayed here. Only permitted wellbeing signals and support workflow data are available.</div></aside>
+<main><header><div><p class="eyebrow">HUMAN-IN-THE-LOOP DEMO</p><h1>Overview</h1><p id="connection">Sign in to load authorized synthetic demo data.</p></div><button id="signOut" class="ghost hidden">Sign out</button></header>
+<section id="loginPanel" class="login-panel"><div><span class="pill">Synthetic demo</span><h2>Secure demo sign-in</h2><p>Use an authorized staff account. This dashboard intentionally excludes full journal entries.</p></div>
+<form id="loginForm"><label>Email<input id="email" type="email" value="admin@safespace.app"></label><label>Password<input id="password" type="password" value="demo123"></label><button type="submit" class="primary">Open dashboard</button><p id="loginError" class="error" role="alert"></p></form></section>
+<section id="dashboard" class="hidden"><div class="metrics"><article><span>Enrolled users</span><strong id="mUsers">—</strong></article><article><span>Recent check-ins</span><strong id="mCheckins">—</strong></article><article><span>Notable changes</span><strong id="mChanges">—</strong></article><article><span>Pending support</span><strong id="mSupport">—</strong></article><article><span>Appointments</span><strong id="mAppointments">—</strong></article></div>
+<div class="grid"><section class="panel"><div class="panel-head"><div><p class="eyebrow">EXPLAINABLE SIGNALS</p><h2>Recent wellbeing changes</h2></div><span class="soft">Non-diagnostic</span></div><div id="alertsList" class="stack"></div></section>
+<section class="panel"><div class="panel-head"><div><p class="eyebrow">SUPPORT WORKFLOW</p><h2>Pending requests</h2></div><span class="soft">Minimum necessary data</span></div><div id="supportList" class="stack"></div></section></div>
+<section class="panel"><div class="panel-head"><div><p class="eyebrow">PRIVACY & ACCOUNTABILITY</p><h2>Access trail</h2></div><button id="refresh" class="ghost">Refresh</button></div><div id="auditList" class="audit"></div></section></section>
+</main></div></body></html>

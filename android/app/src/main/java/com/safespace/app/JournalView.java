@@ -62,6 +62,12 @@ final class JournalView extends FrameLayout {
         entries.setOrientation(LinearLayout.VERTICAL);
         page.addView(entries, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        String savedBody = activity.getSharedPreferences("safe_space_journal_local", android.content.Context.MODE_PRIVATE)
+                .getString("latest_body", "");
+        if (savedBody != null && !savedBody.trim().isEmpty()) {
+            addEntry("✎", "Latest reflection", savedBody, "Saved privately",
+                    0xFFE8E1FF, PURPLE, true);
+        }
         addEntry("▣", "A Brighter Day", "Today I felt more at peace...", "9 Sep 2026",
                 0xFFE4E2FF, 0xFF6E5BDC, false);
         addEntry("✎", "Gratitude", "I'm grateful for the little things...", "7 Sep 2026",
@@ -165,16 +171,38 @@ final class JournalView extends FrameLayout {
     }
 
     private void createEntry() {
-        if (!draftAdded) {
-            addEntry("✦", "A New Beginning", "One gentle thought at a time...", "Just now",
-                    0xFFE8E1FF, PURPLE, true);
-            draftAdded = true;
-            SupportSignalEngine.recordJournal(activity);
-            Toast.makeText(activity, "New entry added", Toast.LENGTH_SHORT).show();
-            scroll.post(() -> scroll.smoothScrollTo(0, 0));
-        } else {
-            navigator.openScreen(21);
-        }
+        final android.widget.EditText editor = new android.widget.EditText(activity);
+        editor.setHint("What stayed on your mind today?");
+        editor.setMinLines(5);
+        editor.setGravity(Gravity.TOP | Gravity.START);
+        editor.setPadding(dp(16), dp(14), dp(16), dp(14));
+        editor.setBackground(rounded(0xFFF8F7FC, dp(16), dp(1), 0x287B4FE9));
+        android.widget.FrameLayout holder = new android.widget.FrameLayout(activity);
+        holder.setPadding(dp(18), dp(4), dp(18), 0);
+        holder.addView(editor, new android.widget.FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, dp(180)));
+
+        new android.app.AlertDialog.Builder(activity)
+                .setTitle("New journal entry")
+                .setMessage("Your entry stays private on this device. Journal intelligence is opt-in.")
+                .setView(holder)
+                .setNegativeButton("Cancel", null)
+                .setPositiveButton("Save privately", (dialog, which) -> {
+                    String body = editor.getText().toString().trim();
+                    if (body.isEmpty()) {
+                        Toast.makeText(activity, "Nothing was saved", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    activity.getSharedPreferences("safe_space_journal_local", android.content.Context.MODE_PRIVATE)
+                            .edit().putString("latest_body", body)
+                            .putLong("latest_saved_at", System.currentTimeMillis()).apply();
+                    String preview = body.length() > 74 ? body.substring(0, 74) + "…" : body;
+                    addEntry("✎", "Latest reflection", preview, "Just now",
+                            0xFFE8E1FF, PURPLE, true);
+                    SupportSignalEngine.recordJournal(activity);
+                    Toast.makeText(activity, "Saved privately", Toast.LENGTH_SHORT).show();
+                    scroll.post(() -> scroll.smoothScrollTo(0, 0));
+                }).show();
     }
 
     private void addEntry(String icon, String title, String preview, String date,

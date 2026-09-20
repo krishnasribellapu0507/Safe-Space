@@ -217,7 +217,7 @@ final class SafeSpace360View extends PastelScreenView {
     }
 
     private void refreshSummary() {
-        int score = SupportSignalEngine.supportScore(activity);
+        int score = SupportSignalEngine.wellbeingScore(activity);
         weatherValue.setText(SupportSignalEngine.band(activity) + "  •  " + score + "/100");
         weatherWhy.setText(SupportSignalEngine.explanation(activity));
 

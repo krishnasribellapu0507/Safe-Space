@@ -4,67 +4,161 @@
       "id": "demo",
       "name": "Krishnasri",
       "email": "demo@safespace.app",
-      "language": "English"
+      "language": "English",
+      "role": "user",
+      "authMode": "demo"
+    },
+    {
+      "id": "other",
+      "name": "Demo User 2",
+      "email": "user2@safespace.app",
+      "language": "English",
+      "role": "user",
+      "authMode": "demo"
+    },
+    {
+      "id": "admin",
+      "name": "Demo Administrator",
+      "email": "admin@safespace.app",
+      "language": "English",
+      "role": "administrator",
+      "authMode": "demo"
+    },
+    {
+      "id": "counsellor",
+      "name": "Demo Counsellor",
+      "email": "counsellor@safespace.app",
+      "language": "English",
+      "role": "counsellor",
+      "authMode": "demo"
     }
   ],
   "moods": [
     {
       "id": "m1",
       "userId": "demo",
-      "mood": "okay",
-      "createdAt": "2026-09-08T09:00:00Z"
+      "mood": "Good",
+      "sleep": 4,
+      "stress": 2,
+      "energy": 4,
+      "safety": 5,
+      "connection": 4,
+      "createdAt": "2026-09-15T09:00:00Z"
     },
     {
       "id": "m2",
       "userId": "demo",
-      "mood": "worried",
-      "createdAt": "2026-09-09T09:00:00Z"
+      "mood": "Okay",
+      "sleep": 4,
+      "stress": 2,
+      "energy": 4,
+      "safety": 5,
+      "connection": 4,
+      "createdAt": "2026-09-16T09:00:00Z"
     },
     {
       "id": "m3",
       "userId": "demo",
-      "mood": "low",
-      "createdAt": "2026-09-10T09:00:00Z"
+      "mood": "Low",
+      "sleep": 3,
+      "stress": 3,
+      "energy": 3,
+      "safety": 4,
+      "connection": 3,
+      "createdAt": "2026-09-17T09:00:00Z"
+    },
+    {
+      "id": "m4",
+      "userId": "demo",
+      "mood": "Low",
+      "sleep": 2,
+      "stress": 4,
+      "energy": 2,
+      "safety": 4,
+      "connection": 3,
+      "createdAt": "2026-09-18T09:00:00Z"
+    },
+    {
+      "id": "m5",
+      "userId": "demo",
+      "mood": "Overwhelmed",
+      "sleep": 2,
+      "stress": 5,
+      "energy": 2,
+      "safety": 4,
+      "connection": 2,
+      "createdAt": "2026-09-19T09:00:00Z"
+    },
+    {
+      "id": "m-other",
+      "userId": "other",
+      "mood": "Okay",
+      "sleep": 3,
+      "stress": 3,
+      "energy": 3,
+      "safety": 4,
+      "connection": 3,
+      "createdAt": "2026-09-19T09:30:00Z"
     }
   ],
   "journals": [
     {
       "id": "j1",
       "userId": "demo",
-      "text": "Upcoming hearing is making me worried, but breathing helped.",
+      "text": "Upcoming hearing is on my mind. Breathing helped me settle.",
       "mood": "Worried",
-      "favorite": true
+      "favorite": true,
+      "createdAt": "2026-09-18T19:30:00Z"
+    },
+    {
+      "id": "j-private-other",
+      "userId": "other",
+      "text": "This private entry belongs only to the other demo user.",
+      "mood": "Reflection",
+      "favorite": false,
+      "createdAt": "2026-09-19T20:00:00Z"
     }
   ],
   "counsellors": [
     {
       "id": "c1",
-      "name": "Dr. Ananya Rao",
+      "name": "Synthetic Demo Counsellor A",
       "languages": [
         "English",
         "Telugu"
       ],
-      "availability": "Demo: today 4 PM"
+      "availability": "Synthetic demo slot: today 4 PM"
     },
     {
       "id": "c2",
-      "name": "Meera Singh",
+      "name": "Synthetic Demo Counsellor B",
       "languages": [
         "English",
         "Hindi"
       ],
-      "availability": "Demo: tomorrow 11 AM"
+      "availability": "Synthetic demo slot: tomorrow 11 AM"
     }
   ],
   "appointments": [],
+  "support_requests": [
+    {
+      "id": "sr-seed",
+      "userId": "demo",
+      "type": "counsellor",
+      "message": "Synthetic demo request",
+      "status": "pending",
+      "createdAt": "2026-09-19T12:00:00Z"
+    }
+  ],
   "journey": [
     {
       "id": "e1",
       "userId": "demo",
       "stage": "Hearing",
-      "date": "2026-09-12T10:00:00Z",
-      "note": "Demo upcoming case event"
+      "date": "2026-09-22T10:00:00Z",
+      "note": "Synthetic demo case event"
     }
   ],
-  "alerts": []
+  "alerts": [],
+  "audit_logs": []
 }
