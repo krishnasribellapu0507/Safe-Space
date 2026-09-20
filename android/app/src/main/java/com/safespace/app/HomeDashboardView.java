@@ -181,7 +181,7 @@ final class HomeDashboardView extends FrameLayout {
         greeting.setOrientation(LinearLayout.VERTICAL);
         greeting.setGravity(Gravity.CENTER_HORIZONTAL);
 
-        TextView title = text("Good morning,", 22, NAVY, true);
+        TextView title = text(timeGreeting(), 22, NAVY, true);
         title.setGravity(Gravity.CENTER);
         greeting.addView(title, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -211,6 +211,14 @@ final class HomeDashboardView extends FrameLayout {
         avatar.setOnClickListener(view -> navigator.openScreen(16));
         row.addView(avatar, new LinearLayout.LayoutParams(dp(48), dp(48)));
         return row;
+    }
+
+    private String timeGreeting() {
+        int hour = java.util.Calendar.getInstance().get(java.util.Calendar.HOUR_OF_DAY);
+        String part = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : hour < 21 ? "Good evening" : "Good night";
+        String name = activity.getSharedPreferences("safe_space_profile", Context.MODE_PRIVATE)
+                .getString("display_name", "");
+        return name == null || name.trim().isEmpty() ? part : part + ", " + name.trim();
     }
 
     private View buildMoodPrompt() {
@@ -288,6 +296,7 @@ final class HomeDashboardView extends FrameLayout {
         card.setElevation(dp(3));
         card.setBackground(rippleRounded(0xF2FFFFFF, dp(20), 0x227B4FE9));
         card.setContentDescription(label);
+        MotionSystem.bindPress(card);
         card.setOnClickListener(view -> navigator.openScreen(targetScreen));
 
         TextView iconView = text(icon, 27, iconColor, true);
@@ -361,9 +370,9 @@ final class HomeDashboardView extends FrameLayout {
                 new int[]{0xF8FFFFFF, 0xFFF4F7FF}));
 
         bar.addView(navItem("⌂", "Home", true, 8), navItemParams());
-        bar.addView(navItem("☺", "Check-in", false, 9), navItemParams());
-        bar.addView(centerLotus(), navItemParams());
+        bar.addView(navItem("▤", "Journal", false, 11), navItemParams());
         bar.addView(navItem("◌", "Calm", false, 12), navItemParams());
+        bar.addView(navItem("▥", "Insights", false, 14), navItemParams());
         bar.addView(navItem("●", "Profile", false, 16), navItemParams());
         return bar;
     }

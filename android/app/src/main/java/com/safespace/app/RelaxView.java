@@ -373,6 +373,11 @@ final class RelaxView extends FrameLayout {
     }
 
     private void startBreathingAnimation() {
+        if (MotionSystem.reducedMotion(activity)) {
+            orb.setScaleX(1f);
+            orb.setScaleY(1f);
+            return;
+        }
         breathingAnimator = ValueAnimator.ofFloat(.97f, 1.035f);
         breathingAnimator.setDuration(3200L);
         breathingAnimator.setRepeatCount(ValueAnimator.INFINITE);

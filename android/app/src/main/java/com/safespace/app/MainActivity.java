@@ -48,10 +48,16 @@ public final class MainActivity extends Activity implements ScreenNavigator {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         }
         root = new FrameLayout(this);
-        introView = new SafeSpaceView(this, () -> showAuthScreen(true));
-        root.addView(introView, new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+        boolean authenticated = getSharedPreferences("safe_space_session", MODE_PRIVATE)
+                .getBoolean("authenticated", false);
         setContentView(root);
+        if (authenticated) {
+            root.post(this::showHomeScreen);
+        } else {
+            introView = new SafeSpaceView(this, () -> showAuthScreen(true));
+            root.addView(introView, new FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+        }
     }
 
     private void showAuthScreen(boolean signUp) {
@@ -375,16 +381,18 @@ public final class MainActivity extends Activity implements ScreenNavigator {
         private static final int LIGHT_PURPLE = Color.rgb(201, 155, 255);
 
         private final String[] titles = {
-                "Find Your\nSafe Space",
-                "Talk\nFreely",
-                "Small Steps\nBig Progress"
+                "Understand how\nyou're feeling",
+                "Everything in one\nsafe space",
+                "Support when\nit matters",
+                "Your feelings\nbelong to you."
         };
         private final String[] bodies = {
-                "A supportive journey\nfor your mind, always\nwith you.",
-                "Share your thoughts,\nfeelings and worries,\nwithout judgment.",
-                "Track your mood, build\nhealthy habits and feel\nmore in control."
+                "Quick check-ins help you\nnotice how things change\nover time.",
+                "Journal, calming tools,\nwellbeing insights and support\ntogether.",
+                "Notice meaningful changes\nand choose the support\nthat feels right.",
+                "Private by default.\nYou decide what is analyzed\nand what is shared."
         };
-        private final String[] buttons = {"Next", "Next", "Get Started"};
+        private final String[] buttons = {"Next", "Next", "Next", "Get Started"};
 
         private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
         private final Rect bitmapSource = new Rect();
@@ -431,7 +439,7 @@ public final class MainActivity extends Activity implements ScreenNavigator {
             }
             setFocusable(true);
             setClickable(true);
-            setContentDescription("Safe Space opening screen. A calmer you. A brighter tomorrow.");
+            setContentDescription("Safe Space opening screen. Your wellbeing. Your space.");
             startSplashSequence();
         }
 
@@ -515,7 +523,7 @@ public final class MainActivity extends Activity implements ScreenNavigator {
             paint.setTypeface(android.graphics.Typeface.create("sans-serif-rounded", android.graphics.Typeface.BOLD));
             paint.setTextAlign(Paint.Align.CENTER);
             paint.setTextSize(sp(18));
-            drawLines(canvas, "A calmer you\nA brighter tomorrow", width / 2f,
+            drawLines(canvas, "Your wellbeing.\nYour space.", width / 2f,
                     height * .755f, dp(25));
 
             float trackWidth = Math.min(dp(155), width * .42f);
@@ -579,6 +587,8 @@ public final class MainActivity extends Activity implements ScreenNavigator {
                 drawConversationTiles(canvas, width, height);
             } else if (pageIndex == 2) {
                 drawProgressTile(canvas, width / 2f, height * .49f);
+            } else if (pageIndex == 3) {
+                drawPrivacyTile(canvas, width / 2f, height * .49f);
             }
 
             float buttonHeight = dp(56);
@@ -606,8 +616,8 @@ public final class MainActivity extends Activity implements ScreenNavigator {
 
         private void drawPagerDots(Canvas canvas, float centerX, float centerY, int pageIndex) {
             float spacing = dp(16);
-            for (int i = 0; i < 3; i++) {
-                float x = centerX + (i - 1) * spacing;
+            for (int i = 0; i < 4; i++) {
+                float x = centerX + (i - 1.5f) * spacing;
                 if (i == pageIndex) {
                     paint.setStyle(Paint.Style.FILL);
                     paint.setColor(PURPLE);
@@ -702,6 +712,23 @@ public final class MainActivity extends Activity implements ScreenNavigator {
             }
         }
 
+        private void drawPrivacyTile(Canvas canvas, float centerX, float centerY) {
+            float size = dp(92);
+            RectF tile = new RectF(centerX - size / 2f, centerY - size / 2f,
+                    centerX + size / 2f, centerY + size / 2f);
+            paint.setColor(0xEFFFFFFF);
+            canvas.drawRoundRect(tile, dp(24), dp(24), paint);
+            paint.setColor(PURPLE);
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setStrokeWidth(dp(4));
+            RectF shield = new RectF(centerX - dp(23), centerY - dp(28),
+                    centerX + dp(23), centerY + dp(28));
+            canvas.drawRoundRect(shield, dp(18), dp(18), paint);
+            canvas.drawCircle(centerX, centerY - dp(5), dp(6), paint);
+            canvas.drawLine(centerX, centerY + dp(2), centerX, centerY + dp(15), paint);
+            paint.setStyle(Paint.Style.FILL);
+        }
+
         private void drawLines(Canvas canvas, String text, float centerX,
                                float firstBaseline, float lineHeight) {
             String[] lines = text.split("\\n");
@@ -727,7 +754,7 @@ public final class MainActivity extends Activity implements ScreenNavigator {
                 float deltaX = event.getX() - touchDownX;
                 float deltaY = event.getY() - touchDownY;
                 if (Math.abs(deltaX) > dp(48) && Math.abs(deltaX) > Math.abs(deltaY)) {
-                    if (deltaX < 0 && page < 2) {
+                    if (deltaX < 0 && page < 3) {
                         setPage(page + 1);
                     } else if (deltaX > 0 && page > 0) {
                         setPage(page - 1);
@@ -737,7 +764,7 @@ public final class MainActivity extends Activity implements ScreenNavigator {
                 }
                 if (buttonBounds.contains(event.getX(), event.getY())) {
                     performClick();
-                    if (page < 2) {
+                    if (page < 3) {
                         setPage(page + 1);
                     } else {
                         completeOnboarding();
@@ -755,7 +782,7 @@ public final class MainActivity extends Activity implements ScreenNavigator {
         }
 
         private void setPage(int newPage) {
-            if (newPage < 0 || newPage > 2 || newPage == page) {
+            if (newPage < 0 || newPage > 3 || newPage == page) {
                 return;
             }
             transitionFromPage = page;

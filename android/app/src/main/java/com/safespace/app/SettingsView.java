@@ -52,7 +52,14 @@ final class SettingsView extends FrameLayout {
 
         card.addView(settingRow("♧", "Notifications", "›", () -> toast("Notification settings")));
         addDivider(card);
-        card.addView(settingRow("▣", "Privacy & Security", "›", () -> toast("Privacy settings")));
+        card.addView(settingRow("▣", "Privacy & Security", "Consent Center  ›", () -> ConsentCenter.show(activity)));
+        addDivider(card);
+        card.addView(settingRow("◐", "Accessibility", "Reduced motion & contrast  ›", () -> AccessibilityCenter.show(activity)));
+        addDivider(card);
+        card.addView(settingRow("▶", "Presentation Demo", "Reset scenario  ›", () -> {
+            DemoScenario.reset(activity);
+            toast("Demo scenario reset: 5-day wellbeing change ready");
+        }));
         addDivider(card);
         card.addView(appearanceRow());
         addDivider(card);
